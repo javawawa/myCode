@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linjiao.cmslive.mapper.test.CMSLiveMapper">
+    <resultMap id="BaseResultMap" type="com.linjiao.cmslive.model.CMSLive">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="source_id" jdbcType="INTEGER" property="sourceId"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="source" jdbcType="CHAR" property="source"/>
+        <result column="is_important" jdbcType="CHAR" property="isImportant"/>
+        <result column="is_comment" jdbcType="CHAR" property="isComment"/>
+        <result column="comment_content" jdbcType="VARCHAR" property="commentContent"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="stat" jdbcType="INTEGER" property="stat"/>
+        <result column="live_time" jdbcType="TIMESTAMP" property="liveTime"/>
+        <result column="create_at" jdbcType="TIMESTAMP" property="createAt"/>
+        <result column="create_by" jdbcType="INTEGER" property="createBy"/>
+        <result column="update_at" jdbcType="TIMESTAMP" property="updateAt"/>
+        <result column="update_by" jdbcType="INTEGER" property="updateBy"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.linjiao.cmslive.model.CMSLive">
+        <result column="content_html" jdbcType="LONGVARCHAR" property="contentHtml"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, source_id, label, title, content, source, is_important, is_comment, comment_content, 
+    status, stat, live_time, create_at, create_by, update_at, update_by
+  </sql>
+    <sql id="Blob_Column_List">
+    content_html
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from lj_cms_live
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lj_cms_live
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.linjiao.cmslive.model.CMSLive">
+    insert into lj_cms_live (id, source_id, label, 
+      title, content, source, 
+      is_important, is_comment, comment_content, 
+      status, stat, live_time, 
+      create_at, create_by, update_at, 
+      update_by, content_html)
+    values (#{id,jdbcType=INTEGER}, #{sourceId,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{source,jdbcType=CHAR}, 
+      #{isImportant,jdbcType=CHAR}, #{isComment,jdbcType=CHAR}, #{commentContent,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{stat,jdbcType=INTEGER}, #{liveTime,jdbcType=TIMESTAMP}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{createBy,jdbcType=INTEGER}, #{updateAt,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=INTEGER}, #{contentHtml,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.linjiao.cmslive.model.CMSLive">
+        insert into lj_cms_live
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sourceId != null">
+                source_id,
+            </if>
+            <if test="label != null">
+                label,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="isImportant != null">
+                is_important,
+            </if>
+            <if test="isComment != null">
+                is_comment,
+            </if>
+            <if test="commentContent != null">
+                comment_content,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="stat != null">
+                stat,
+            </if>
+            <if test="liveTime != null">
+                live_time,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="contentHtml != null">
+                content_html,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sourceId != null">
+                #{sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="label != null">
+                #{label,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=CHAR},
+            </if>
+            <if test="isImportant != null">
+                #{isImportant,jdbcType=CHAR},
+            </if>
+            <if test="isComment != null">
+                #{isComment,jdbcType=CHAR},
+            </if>
+            <if test="commentContent != null">
+                #{commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="stat != null">
+                #{stat,jdbcType=INTEGER},
+            </if>
+            <if test="liveTime != null">
+                #{liveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=INTEGER},
+            </if>
+            <if test="contentHtml != null">
+                #{contentHtml,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.linjiao.cmslive.model.CMSLive">
+        update lj_cms_live
+        <set>
+            <if test="sourceId != null">
+                source_id = #{sourceId,jdbcType=INTEGER},
+            </if>
+            <if test="label != null">
+                label = #{label,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=CHAR},
+            </if>
+            <if test="isImportant != null">
+                is_important = #{isImportant,jdbcType=CHAR},
+            </if>
+            <if test="isComment != null">
+                is_comment = #{isComment,jdbcType=CHAR},
+            </if>
+            <if test="commentContent != null">
+                comment_content = #{commentContent,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="stat != null">
+                stat = #{stat,jdbcType=INTEGER},
+            </if>
+            <if test="liveTime != null">
+                live_time = #{liveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=INTEGER},
+            </if>
+            <if test="contentHtml != null">
+                content_html = #{contentHtml,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.linjiao.cmslive.model.CMSLive">
+    update lj_cms_live
+    set source_id = #{sourceId,jdbcType=INTEGER},
+      label = #{label,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      source = #{source,jdbcType=CHAR},
+      is_important = #{isImportant,jdbcType=CHAR},
+      is_comment = #{isComment,jdbcType=CHAR},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      stat = #{stat,jdbcType=INTEGER},
+      live_time = #{liveTime,jdbcType=TIMESTAMP},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=INTEGER},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      content_html = #{contentHtml,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.linjiao.cmslive.model.CMSLive">
+    update lj_cms_live
+    set source_id = #{sourceId,jdbcType=INTEGER},
+      label = #{label,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      source = #{source,jdbcType=CHAR},
+      is_important = #{isImportant,jdbcType=CHAR},
+      is_comment = #{isComment,jdbcType=CHAR},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      stat = #{stat,jdbcType=INTEGER},
+      live_time = #{liveTime,jdbcType=TIMESTAMP},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=INTEGER},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--获取最大的sourceId用于更新-->
+    <select id="selectBiggestSourceId" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT
+          source_id
+        FROM
+          `lj_cms_live`
+        WHERE source =#{source}
+        ORDER BY source_id DESC
+        LIMIT 1
+    </select>
+</mapper>
